@@ -27,6 +27,31 @@
 
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+    //First thing: get all of the triggers, which is basically give the items that will require it a background when hovered
+    const triggers = document.querySelectorAll('a');
+    //Second, lets get the hightlight
+    const highlight = document.createElement('span');
+    //Second(b), we are going to add a class of highlight
+    highlight.classList.add('highlight');
+    //Second(c), we will put it into the DOM
+    document.body.append(highlight);
+    //Third. We need to listen for someone who enters in a link 
+    function highlightLink(){
+        //Fifth, we need to find out how big the background is going to be. 
+        const linkCoords = this.getBoundingClientRect();
+        console.log(linkCoords);
+        //Sixth, we can take our highlight element and apply the style 
+        highlight.style.width = `${linkCoords.width}px`
+        highlight.style.height = `${linkCoords.height}px`
+
+        //Seventh, we will start to animate the left and right values
+        highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+    }
+
+    //Fourth. We'll listen for the mouse enter event on each of our triggers 
+    triggers.forEach(a => a.addEventListener('mouseenter', highlightLink)); 
+
   </script>
 </body>
 </html>

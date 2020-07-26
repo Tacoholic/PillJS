@@ -41,12 +41,20 @@
         //Fifth, we need to find out how big the background is going to be. 
         const linkCoords = this.getBoundingClientRect();
         console.log(linkCoords);
-        //Sixth, we can take our highlight element and apply the style 
-        highlight.style.width = `${linkCoords.width}px`
-        highlight.style.height = `${linkCoords.height}px`
 
-        //Seventh, we will start to animate the left and right values
-        highlight.style.transform = `translate(${linkCoords.left}px, ${linkCoords.top}px)`;
+        //Eight, we will refactor because the coords are off by 67. we will change the linkcoords to coord in lines 53 and 54
+        const coords = {
+            width: linkCoords.width,
+            height: linkCoords.height,
+            top: linkCoords.top + window.scrollY,
+            left: linkCoords.left + window.scrollX 
+        }
+        //Sixth, we can take our highlight element and apply the style 
+        highlight.style.width = `${coords.width}px`
+        highlight.style.height = `${coords.height}px`
+
+        //Seventh, we will start to animate the left and right values. Instead of using CSS, we will be using the transform property
+        highlight.style.transform = `translate(${coords.left}px, ${coords .top}px)`;
     }
 
     //Fourth. We'll listen for the mouse enter event on each of our triggers 
